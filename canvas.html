@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		做一个简单的画布
+		<canvas id="Mycanvas" width="400" height="400"></canvas>
+		<script>
+			var can = document.getElementById('Mycanvas');
+			
+//			方案一绘制实心图形,fillStyle填充颜色，fillRect填充路劲。
+			//定义画布是2d图形；
+			can = can.getContext('2d');
+			//定义填充的颜色
+			can.fillStyle = "#ff0000";
+//			定义画布的绘制路劲代表从左上角开始绘制,依次是x和y轴
+			can.fillRect(0,0,100,75);
+			
+			
+//			方案二绘制线条图形 同moveTo作为起点,lineTo 作为绘制路劲,stroke为结束绘制.
+			can.moveTo(10,10);
+			can.lineTo(50,10);
+			can.lineTo(50,60);
+			can.lineTo(10,60);
+			can.lineTo(10,10);
+			can.stroke();
+			
+			//方案三画一个圆形 ,beginPAth花园开始的方法，arc方法参数依次是圆半径的x轴,圆半径y轴，圆的半径，绘制的起点，终点，顺时针
+//			或者逆时针绘制.
+			
+			can.fillStyle="green";
+			can.beginPath();
+			can.arc(50,20,10,0,Math.PI*2,true);
+			can.closePath();
+			can.fill()
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				padding:0;
+				margin:0;
+				list-style:none;
+			}
+			#content{
+				width:600px;
+				height:400px;
+				border:1px solid black;
+			}
+			#list{
+				width:100px;
+				padding:20px;
+				border:1px solid black;
+				float:left;
+			}
+			#list li {
+				padding: 5px;
+				border:1px solid black;
+			}
+			#box{
+				width:200px;
+				height:100px;
+				background-color:green;	
+				float:left;
+				margin-left:50px;
+			}
+			html{
+				overflow-scrolling:touch;
+			}
+		</style>
+	</head>
+	<body>
+		收藏夹的一个效果，这里面需要把需要拖动的元素赋拖动属性，draggable = true,然后通过拖动事件：
+		dragstart来写入ev.dataTransfer.setData()方法，这里面接收两个参数，第一个是定义方法名称，
+		第二个是属性值，用来拖动元素获取的，因为默认为不可拖动，需要垃圾箱添加当前移动dragmove事件
+		取消默认事件，最后通过drop事件来添加ev.dataTransfer.getData()方法通过方法名称来获取到值，
+		然后进行后续操作。
+		
+		<div id="content">
+			<ul id="list">
+				<li>收藏1</li>
+				<li>收藏2</li>
+				<li>收藏3</li>
+				<li>收藏4</li>
+				<li>收藏5</li>
+			</ul>
+			<div id="box">
+				垃圾箱
+			</div>
+		</div>
+		<script>
+			var lists = document.getElementById('list').children;
+			var box = document.getElementById('box');
+			for(var i=0;i<lists.length;i++){
+				lists[i].draggable = 'true';
+				lists[i].index = i;
+				lists[i].setAttribute('id',i)
+				lists[i].ondragstart = function(ev){
+					ev.dataTransfer.setData('text',ev.target.id);
+				}
+			}
+			box.ondragover = function(ev){
+					ev.preventDefault();
+				}
+			box.ondrop = function(ev){
+				ev.preventDefault();
+					var data = ev.dataTransfer.getData('text');
+					console.log(data)
+					ev.target.appendChild(document.getElementById(data))
+				}
+		</script>
+	</body>
+</html>

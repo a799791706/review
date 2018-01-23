@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#odiv{
+				height:400px;
+				width:400px;
+				background-color: red;
+			}
+			svg{
+				/*background: gray;*/
+			}
+			polygon{
+				fill:none;
+				stroke:gray;
+				stroke-width:2px;
+				stroke-dasharray: 1440;
+				stroke-dashoffset: 1440;
+			}
+			@keyframes demo1{
+				to{
+					stroke-dashoffset:0;
+				}
+			}
+			#odiv:hover polygon{
+				animation:demo1 .5s linear 1 forwards
+			}
+		</style>
+	</head>
+	<body>
+		<div id="odiv">
+			<svg width="380" height="380">
+				<polygon points="20,20,380,20,380,380,20,380,20,20"></polygon>
+			</svg>
+		</div>
+	</body>
+</html>
